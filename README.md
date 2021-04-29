@@ -1,4 +1,19 @@
-# mei-pjotinha-app
+# Helios PJ Calculators
+
+## Motivação
+
+Dificuldade no momento de calcular o imposto de renda de Pessoa Física, trabalhando
+na categoria de MEI.
+
+## Como contribuir
+
+Clone o projeto, faça suas alterações e mande um Pull Request.
+
+## Roadmap
+
+- Adicionar testes
+- Melhorar calculos
+- Novas calculadoras
 
 ## Project setup
 ```
