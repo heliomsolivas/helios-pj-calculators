@@ -1,0 +1,44 @@
+{
+    "aliquotas": [
+        {
+            "id": 1,
+            "text": "1º faixa: até R$ 22.847,76",
+            "start": 0,
+            "end": 22857.76,
+            "percentage": 0,
+            "deduzir": 0
+        },
+        {
+            "id": 2,
+            "text": "2º faixa: até R$ 22.847,76 até R$ 33.919,81",
+            "start": 22847.77,
+            "end": 33919.80,
+            "percentage": 7.5,
+            "deduzir": 1713.58
+        },
+        {
+            "id": 3,
+            "text": "3º faixa: até R$ 33.919,81 até R$ 45.012,61",
+            "start": 33919.81,
+            "end": 45012.060,
+            "percentage": 15,
+            "deduzir": 4257.57
+        },
+        {
+            "id": 4,
+            "text": "4º faixa: até R$ 45.012,61 até R$ 55.976,16",
+            "start": 45012.61,
+            "end": 55976.16,
+            "percentage": 22.5,
+            "deduzir": 7633.51
+        },
+        {
+            "id": 5,
+            "text": "5º faixa: acima de R$ 55.976,16",
+            "start": 55976.16,
+            "end": 9999999,
+            "percentage": 27.5,
+            "deduzir": 10432.32
+        }
+    ]
+}
