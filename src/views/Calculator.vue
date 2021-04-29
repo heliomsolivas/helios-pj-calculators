@@ -19,7 +19,7 @@
 
           <div class="form__control">
             <label for="despesasComprovadasDoMei"
-              >Despesas comprovadas do MEI</label
+              >Despesas comprovadas do MEI (gastos no ano)</label
             >
             <input
               type="tel"
