@@ -9,6 +9,10 @@ na categoria de MEI.
 
 Clone o projeto, faça suas alterações e mande um Pull Request.
 
+ou
+
+Me mande um email: heliomsolivas@gmail.com que a gente pode pensar em algumas idéias juntos. :)
+
 ## Roadmap
 
 - Adicionar testes
