@@ -19,6 +19,10 @@ Me mande um email: heliomsolivas@gmail.com que a gente pode pensar em algumas id
 
 ## Roadmap
 
+- Vale Transporte / Vale Alimentação
+- Gráficos (?)
+- Transição de MEI para ME
+- Calculo CLT X MEI
 - Adicionar testes
 - Melhorar calculos
 - Novas calculadoras
