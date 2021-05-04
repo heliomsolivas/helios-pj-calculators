@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1>Planejando benefícios trabalhista sendo MEI</h1>
+    <h1>Planejando benefícios trabalhistas sendo MEI</h1>
     <p class="text-left">
       De um modo análogo à CLT, propomos que seu salário bruto seja dividido em
       “provisões” para todos os benefícios trabalhistas. Algumas empresas
