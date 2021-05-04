@@ -6,7 +6,10 @@ import VueAnalytics from "vue-analytics";
 
 Vue.use(VueAnalytics, {
   id: 'UA-73380905-5',
-  router
+  router,
+  autoTracking: {
+    screenview: true
+  }
 });
 
 Vue.config.productionTip = false;
