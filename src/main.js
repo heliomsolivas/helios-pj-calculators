@@ -5,7 +5,7 @@ import router from "./router";
 import VueAnalytics from "vue-analytics";
 
 Vue.use(VueAnalytics, {
-  id: process.env.GOOGLE_ANALYTCS_ID,
+  id: process.env.VUE_APP_GOOGLE_ANALYTCS_ID,
 });
 
 Vue.config.productionTip = false;
