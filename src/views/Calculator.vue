@@ -38,7 +38,7 @@
               type="tel"
               name="lucroEvidenciado"
               v-money="money"
-              :value="lucroEvidenciado"
+              :value="Math.ceil(lucroEvidenciado)"
               disabled
             />
           </div>
@@ -64,7 +64,7 @@
               type="tel"
               name="lucroTributavel"
               v-money="money"
-              :value="lucroTributavel"
+              :value="Math.ceil(lucroTributavel)"
               disabled
             />
           </div>
