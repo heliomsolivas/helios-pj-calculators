@@ -156,6 +156,9 @@ export default {
   },
   directives: { money: VMoney },
   methods: {
+    track () {
+      this.$ga.page('/calculator')
+    },
     async getTabelaAliquotas() {
       await axios.get("/tabela-aliquota-2021.json").then((response) => {
         this.aliquotas = response.data.aliquotas;
@@ -234,42 +237,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.form__control {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 12px;
-}
-.form__control:last-of-type {
-  margin-bottom: 0;
-}
-.form__control label {
-  margin-bottom: 6px;
-}
-input[type="tel"] {
-  height: 42px;
-  padding: 12px;
-}
-.text-left {
-  text-align: left;
-}
-.row--selected {
-  background: #42b983;
-  color: #fff;
-}
-th,
-td {
-  padding: 6px;
-}
-.grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 30px;
-}
-@media (min-width: 768px) {
-  .grid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-</style>

@@ -15,6 +15,7 @@
     "v-money": "^0.8.1",
     "v-money-plus": "^0.1.0",
     "vue": "^2.6.11",
+    "vue-analytics": "^5.22.1",
     "vue-router": "^3.2.0"
   },
   "devDependencies": {
