@@ -11,9 +11,6 @@ Vue.use(VueAnalytics, {
 
 Vue.config.productionTip = false;
 
-console.log(process.env)
-console.log(process.env.VUE_APP_GOOGLE_ANALYTCS_ID)
-
 new Vue({
   router,
   render: (h) => h(App),
