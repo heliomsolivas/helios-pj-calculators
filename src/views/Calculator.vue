@@ -1,12 +1,14 @@
 <template>
   <div class="container">
-    <h1>Calculadora de IRPF para MEI</h1>
+    <h1 class="text-left pb-2">
+      Calculadora de IRPF para MEI
+    </h1>
     <div class="grid">
-      <div>
-        <h2>Passo 1:</h2>
+      <div class="card">
+        <h2 class="text-left pb-2">Passo 1:</h2>
         <div>
           <div class="form__control">
-            <label for="receitaBrutaAnual"
+            <label class="text-left" for="receitaBrutaAnual"
               >Receita Bruta Anual (salário mensal * 12)</label
             >
             <input
@@ -18,7 +20,7 @@
           </div>
 
           <div class="form__control">
-            <label for="despesasComprovadasDoMei"
+            <label class="text-left" for="despesasComprovadasDoMei"
               >Despesas comprovadas do MEI (gastos no ano)</label
             >
             <input
@@ -30,7 +32,7 @@
           </div>
 
           <div class="form__control">
-            <label for="lucroEvidenciado"
+            <label class="text-left" for="lucroEvidenciado"
               >Lucro Evidenciado (Receita Bruta Anual - Despesas comprovadas do
               MEI)</label
             >
@@ -44,20 +46,20 @@
           </div>
 
           <div class="form__control">
-            <label for="parcelaIsenta"
+            <label class="text-left" for="parcelaIsenta"
               >Parcela Isenta de tributação (32% da Receita Bruta Anual)</label
             >
             <input
               type="tel"
               name="parcelaIsenta"
               v-money="money"
-              :value="parcelaIsenta"
+              :value="Math.ceil(parcelaIsenta)"
               disabled
             />
           </div>
 
           <div class="form__control">
-            <label for="parcelaIsenta"
+            <label class="text-left" for="parcelaIsenta"
               >Lucro tributavel (Lucro evidenciado - Parcela Isenta)</label
             >
             <input
@@ -70,13 +72,15 @@
           </div>
         </div>
       </div>
-      <div>
+      <div class="card">
         <div>
-          <h2>Passo 2</h2>
-          <p>Olhar tabela anual da Receita Federal (2021)</p>
+          <h2 class="text-left pb-2">Passo 2:</h2>
+          <h3 class="text-left">
+            Olhar tabela anual da Receita Federal (2021)
+          </h3>
 
-          <table>
-            <tr>
+          <table class="pb-2">
+            <tr class="border-bottom">
               <th>Base de cálculo</th>
               <th>Alíquota</th>
               <th>Parcela a deduzir do IR</th>
@@ -93,9 +97,9 @@
             </tr>
           </table>
 
-          <h2>Passo 3</h2>
+          <h2 class="text-left pb-2">Passo 3:</h2>
           <div class="form__control">
-            <label for="parcelaIsenta"
+            <label class="text-left" for="parcelaIsenta"
               >Parcela a deduzir (Lucro tributavel * porcentagem da aliquota da
               tabela)</label
             >
@@ -108,9 +112,9 @@
             />
           </div>
 
-          <h2>Passo 4</h2>
+          <h2 class="text-left pb-2">Passo 4:</h2>
           <div class="form__control">
-            <label for="parcelaIsenta"
+            <label class="text-left" for="parcelaIsenta"
               >Total para pagar de IR (Parcela deduzida - Parcela deduzida da
               tabela)</label
             >
@@ -123,11 +127,11 @@
             />
           </div>
 
-          <p class="text-left">
+          <div class="featured text-left">
             Você pode guardar por mês o valor de
             <b>{{ convert2Real(totalImpostoDeRenda / 12) }}</b> para pagar o
             imposto de renda de pessoa física no outro ano
-          </p>
+          </div>
         </div>
       </div>
     </div>
@@ -156,8 +160,8 @@ export default {
   },
   directives: { money: VMoney },
   methods: {
-    track () {
-      this.$ga.page('/calculator')
+    track() {
+      this.$ga.page("/calculator");
     },
     async getTabelaAliquotas() {
       await axios.get("/tabela-aliquota-2021.json").then((response) => {
