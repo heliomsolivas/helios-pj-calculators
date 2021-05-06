@@ -5,14 +5,14 @@ import router from "./router";
 import VueAnalytics from "vue-analytics";
 
 Vue.use(VueAnalytics, {
-  id: 'UA-73380905-5',
+  id: process.env.VUE_APP_GOOGLE_ANALYTCS_ID,
   router,
-  autoTracking: {
-    screenview: true
-  }
 });
 
 Vue.config.productionTip = false;
+
+console.log(process.env)
+console.log(process.env.VUE_APP_GOOGLE_ANALYTCS_ID)
 
 new Vue({
   router,
