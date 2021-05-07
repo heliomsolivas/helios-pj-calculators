@@ -52,11 +52,17 @@ Me mande um email: heliomsolivas@gmail.com que a gente pode pensar em algumas id
 ## Roadmap
 
 - Vale Transporte / Vale Alimentação
+    - Idéia 1: pedir a localização do usuário e procurar alguma API
+    para calcular o valor do VT ou VR
+    - Idéia 2: usuário inserir o valor diário do VT/VR
 - Dark Mode
-- Gráficos (?)
+    - Poderia adicionar o Sépia Mode também (ex: https://color-mode.nuxtjs.app/)
+- Gráficos ✅
+- Mais gráficos
+    - Novos gráficos mais interativos
 - Transição de MEI para ME
 - Calculo CLT X MEI
-- Adicionar testes
+- Adicionar testes ✅
 - Melhorar calculos
 - Novas calculadoras
 - Multi Lang README
