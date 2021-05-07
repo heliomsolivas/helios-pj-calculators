@@ -7,11 +7,8 @@ import VueAnalytics from "vue-analytics";
 import './assets/css/general.css';
 
 Vue.use(VueAnalytics, {
-  id: 'UA-73380905-5',
+  id: process.env.VUE_APP_GOOGLE_ANALYTCS_ID,
   router,
-  autoTracking: {
-    screenview: true
-  }
 });
 
 Vue.config.productionTip = false;
