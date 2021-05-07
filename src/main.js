@@ -4,6 +4,9 @@ import "./registerServiceWorker";
 import router from "./router";
 import VueAnalytics from "vue-analytics";
 
+import "chartist/dist/chartist.css";
+import "./assets/css/general.css";
+
 Vue.use(VueAnalytics, {
   id: 'UA-73380905-5',
   router,
