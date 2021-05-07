@@ -103,6 +103,7 @@
 </template>
 
 <script>
+import { convertMoneyMaskToNumber } from "@/utils/utils.js";
 import { VMoney } from "v-money";
 import Chartist from "chartist";
 require("chartist-plugin-legend");
@@ -128,11 +129,10 @@ export default {
       const data = {
         series: this.chartSerie,
       };
-      const receitaBrutaAnual = this.convertMoneyMaskToNumber(
+      const receitaBrutaAnual = convertMoneyMaskToNumber(
         this.receitaBrutaAnual
       );
       if (receitaBrutaAnual === 0) {
-        
       }
       this.updateChart(data);
     },
@@ -140,17 +140,6 @@ export default {
   methods: {
     track() {
       this.$ga.page("/beneficios");
-    },
-    convertMoneyMaskToNumber(maskedMoney) {
-      if (typeof maskedMoney === "string") {
-        const thousandFixed = maskedMoney
-          .replace(/(R\$)/g, "")
-          .trim()
-          .replace(/(.+)[.,](\d+)$/g, "$1x$2")
-          .replace(/[.,]/g, "")
-          .replace("x", ".");
-        return parseFloat(thousandFixed);
-      }
     },
     updateChart(data) {
       if (this.haveChartSeriesData) {
@@ -189,14 +178,14 @@ export default {
   directives: { money: VMoney },
   computed: {
     decimoTerceiro() {
-      const receitaBrutaAnual = this.convertMoneyMaskToNumber(
+      const receitaBrutaAnual = convertMoneyMaskToNumber(
         this.receitaBrutaAnual
       );
       const receitaMensal = receitaBrutaAnual / 12;
       return receitaMensal / 12;
     },
     ferias() {
-      const receitaBrutaAnual = this.convertMoneyMaskToNumber(
+      const receitaBrutaAnual = convertMoneyMaskToNumber(
         this.receitaBrutaAnual
       );
       const receitaMensal = receitaBrutaAnual / 12;
@@ -205,7 +194,7 @@ export default {
       return ferias;
     },
     fgts() {
-      const receitaBrutaAnual = this.convertMoneyMaskToNumber(
+      const receitaBrutaAnual = convertMoneyMaskToNumber(
         this.receitaBrutaAnual
       );
       const receitaMensal = receitaBrutaAnual / 12;
@@ -216,9 +205,7 @@ export default {
       return this.decimoTerceiro + this.ferias + this.fgts;
     },
     chartSerie() {
-      const annualIncome = this.convertMoneyMaskToNumber(
-        this.receitaBrutaAnual
-      );
+      const annualIncome = convertMoneyMaskToNumber(this.receitaBrutaAnual);
       if (annualIncome >= 0) {
         const annualSpends = this.totalGastos * 12;
         const annualIncomeRest = annualIncome - annualSpends;

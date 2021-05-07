@@ -140,6 +140,7 @@
 
 <script>
 import axios from "axios";
+import { convertMoneyMaskToNumber } from "@/utils/utils.js";
 import { VMoney } from "v-money";
 export default {
   data() {
@@ -168,17 +169,6 @@ export default {
         this.aliquotas = response.data.aliquotas;
       });
     },
-    convertMoneyMaskToNumber(maskedMoney) {
-      if (typeof maskedMoney === "string") {
-        const thousandFixed = maskedMoney
-          .replace(/(R\$)/g, "")
-          .trim()
-          .replace(/(.+)[.,](\d+)$/g, "$1x$2")
-          .replace(/[.,]/g, "")
-          .replace("x", ".");
-        return parseFloat(thousandFixed);
-      }
-    },
     convert2Real(valor) {
       return valor.toLocaleString("pt-br", {
         style: "currency",
@@ -188,10 +178,8 @@ export default {
   },
   computed: {
     lucroEvidenciado() {
-      const receitaBruta = this.convertMoneyMaskToNumber(
-        this.receitaBrutaAnual
-      );
-      const despesasCompravadas = this.convertMoneyMaskToNumber(
+      const receitaBruta = convertMoneyMaskToNumber(this.receitaBrutaAnual);
+      const despesasCompravadas = convertMoneyMaskToNumber(
         this.despesasComprovadasDoMei
       );
       // To v-money work properly
@@ -199,9 +187,7 @@ export default {
     },
     parcelaIsenta() {
       const porcentagem = 32 / 100;
-      const receitaBruta = this.convertMoneyMaskToNumber(
-        this.receitaBrutaAnual
-      );
+      const receitaBruta = convertMoneyMaskToNumber(this.receitaBrutaAnual);
       return porcentagem * receitaBruta * 100;
     },
     lucroTributavel() {

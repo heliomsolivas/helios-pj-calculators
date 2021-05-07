@@ -5,7 +5,7 @@ import router from "./router";
 import VueAnalytics from "vue-analytics";
 
 import "chartist/dist/chartist.css";
-import "./assets/css/general.css";
+import "./assets/css/main.scss";
 
 Vue.use(VueAnalytics, {
   id: process.env.VUE_APP_GOOGLE_ANALYTCS_ID,
