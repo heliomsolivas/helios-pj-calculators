@@ -86,6 +86,10 @@
         />
       </div>
 
+      <div class="form__control">
+        <div :class="showChart" class="total-spend-chart" />
+      </div>
+
       <div class="featured text-left">
         <span>Fonte: </span>
         <a
@@ -100,9 +104,13 @@
 
 <script>
 import { VMoney } from "v-money";
+import Chartist from "chartist";
+require("chartist-plugin-legend");
+
 export default {
   data() {
     return {
+      chart: null,
       receitaBrutaAnual: 0,
       money: {
         decimal: ",",
@@ -111,6 +119,23 @@ export default {
         precision: 2,
       },
     };
+  },
+  mounted() {
+    this.setUpChart();
+  },
+  watch: {
+    receitaBrutaAnual() {
+      const data = {
+        series: this.chartSerie,
+      };
+      const receitaBrutaAnual = this.convertMoneyMaskToNumber(
+        this.receitaBrutaAnual
+      );
+      if (receitaBrutaAnual === 0) {
+        
+      }
+      this.updateChart(data);
+    },
   },
   methods: {
     track() {
@@ -126,6 +151,39 @@ export default {
           .replace("x", ".");
         return parseFloat(thousandFixed);
       }
+    },
+    updateChart(data) {
+      if (this.haveChartSeriesData) {
+        this.setUpChart();
+        this.chart.update(data);
+      }
+    },
+    setUpChart() {
+      if (this.haveChartSeriesData && !this.chart) {
+        this.chart = this.getChart();
+      }
+    },
+    getChart() {
+      const formatter = new Intl.NumberFormat("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+      });
+      const options = {
+        labelInterpolationFnc: function(value) {
+          return formatter.format(value);
+        },
+        plugins: [
+          Chartist.plugins.legend({
+            legendNames: [
+              "Valor guardado durante o ano",
+              "Restante da receita anual",
+            ],
+            clickable: false,
+          }),
+        ],
+      };
+
+      return new Chartist.Pie(".total-spend-chart", null, options);
     },
   },
   directives: { money: VMoney },
@@ -157,8 +215,83 @@ export default {
     totalGastos() {
       return this.decimoTerceiro + this.ferias + this.fgts;
     },
+    chartSerie() {
+      const annualIncome = this.convertMoneyMaskToNumber(
+        this.receitaBrutaAnual
+      );
+      if (annualIncome >= 0) {
+        const annualSpends = this.totalGastos * 12;
+        const annualIncomeRest = annualIncome - annualSpends;
+        return [annualIncomeRest, annualSpends];
+      }
+      return [];
+    },
+    haveChartSeriesData() {
+      return this.chartSerie.length > 0;
+    },
+    showChart() {
+      return this.haveChartSeriesData ? "block" : "hidden";
+    },
   },
 };
 </script>
 
-<style></style>
+<style lang="scss">
+.total-spend__container {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  align-content: center;
+}
+
+.total-spend-chart {
+  .ct-legend {
+    position: relative;
+    z-index: 10;
+    list-style: none;
+    font-size: 10pt;
+    text-align: center;
+
+    li {
+      position: relative;
+      padding-left: 23px;
+      margin-right: 10px;
+      margin-bottom: 3px;
+      display: inline-block;
+
+      &:before {
+        width: 8px;
+        height: 8px;
+        position: absolute;
+        left: 0;
+        content: "";
+        border: 3px solid transparent;
+        border-radius: 2px;
+      }
+      .inactive:before {
+        background: transparent;
+      }
+
+      &:nth-child(1)::before {
+        background-color: #ff4757;
+      }
+
+      &:nth-child(2)::before {
+        background-color: #5cec6d;
+      }
+    }
+  }
+
+  .ct-series-b .ct-slice-pie {
+    fill: #ff4757;
+  }
+  .ct-series-a .ct-slice-pie {
+    fill: #5cec6d;
+  }
+
+  .ct-label {
+    fill: #413c3c;
+    font-weight: 500;
+    font-size: 9pt;
+  }
+}
+</style>
