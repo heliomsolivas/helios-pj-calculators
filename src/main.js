@@ -8,11 +8,8 @@ import "chartist/dist/chartist.css";
 import "./assets/css/general.css";
 
 Vue.use(VueAnalytics, {
-  id: 'UA-73380905-5',
+  id: process.env.VUE_APP_GOOGLE_ANALYTCS_ID,
   router,
-  autoTracking: {
-    screenview: true
-  }
 });
 
 Vue.config.productionTip = false;
