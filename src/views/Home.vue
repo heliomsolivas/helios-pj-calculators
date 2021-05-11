@@ -1,7 +1,13 @@
 <template>
   <div class="home">
     <div class="container">
-      <h1 class="text-left pb-2">
+      <div class="grid">
+      <div class="card">
+<img src="@/assets/tudobem.png" alt="Vai ficar tudo bem?">
+      </div>
+
+       <div class="card">
+<h1 class="text-left pb-2">
         Por que Programador (ou desenvolvedor) não podem ser MEI?
       </h1>
       <div
@@ -32,6 +38,11 @@
       >
         Pense muito bem antes de optar pelo MEI, pois sua atividade como profissional de TI não permiti ser MEI.
       </div>
+      </div>
+
+      </div>
+      
+      
     </div>
   </div>
 </template>
