@@ -26,17 +26,17 @@
         da lista de CNAEs (Classificação Nacional de Atividades Econômicas)
         permitidas para o MEI.<br /><br />
 
-        E por isso que os CNAEs de Tecnologia da Informação não fazem parte das
+        E por isso que os CNAEs de programação não fazem parte das
         atividades permitidas para o MEI.<br /><br />
 
-        E sendo assim você que é profissional de TI não pode ser MEI.
+        E sendo assim você que é programador/desenvolvedor não pode ser MEI.
       </div>
       <h2 class="text-left pb-2">Disclaimer</h2>
       <div
         class="text-left pb-2"
         style="margin-top:6px;font-weight:500;font-size:14px;"
       >
-        Pense muito bem antes de optar pelo MEI, pois sua atividade como profissional de TI não permiti ser MEI.
+        Pense muito bem antes de optar pelo MEI, pois sua atividade como programador não se enquadra como MEI.
       </div>
       </div>
 
