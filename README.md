@@ -61,6 +61,8 @@ Me mande um email: heliomsolivas@gmail.com que a gente pode pensar em algumas id
 - Mais gráficos
     - Novos gráficos mais interativos
 - Transição de MEI para ME
+- Impostos para ME
+- Impostos para trabalho para empresas do exterior (Invoice)
 - Calculo CLT X MEI
 - Adicionar testes ✅
 - Melhorar calculos
