@@ -8,7 +8,7 @@
 
        <div class="card">
 <h1 class="text-left pb-2">
-        Por que Programador (ou desenvolvedor) não podem ser MEI?
+        Por que Programador (ou desenvolvedor) não pode ser MEI?
       </h1>
       <div
         class="text-left pb-2"
