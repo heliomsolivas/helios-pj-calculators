@@ -20,7 +20,7 @@
     "v-money-plus": "^0.1.0",
     "vue": "^2.6.11",
     "vue-analytics": "^5.22.1",
-    "vue-gtm": "^3.5.0",
+    "vue-gtm": "3.0.0-vue2",
     "vue-router": "^3.2.0"
   },
   "devDependencies": {
