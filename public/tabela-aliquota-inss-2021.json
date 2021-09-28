@@ -1,0 +1,39 @@
+{
+    "aliquotas": [
+        {
+            "id": 1,
+            "text": "Até R$ 1.100,00",
+            "start": 0,
+            "end": 1100.00,
+            "percentage": 7.5
+        },
+        {
+            "id": 2,
+            "text": "De R$ 1.100,01 até R$ 2.203,48",
+            "start": 1100.01,
+            "end": 2203.48,
+            "percentage": 9
+        },
+        {
+            "id": 3,
+            "text": "De R$ 2.203,49 até R$ 3.305,22",
+            "start": 2203.49,
+            "end": 3305.22,
+            "percentage": 12
+        },
+        {
+            "id": 4,
+            "text": "De R$ 3.305,23 até R$ 6.433,57",
+            "start": 3305.23,
+            "end": 6433.57,
+            "percentage": 14
+        },
+        {
+            "id": 5,
+            "text": "Acima de R$ 6.433,57",
+            "start": 6433.57,
+            "end": 9999999,
+            "percentage": 751.99
+        }
+    ]
+}

@@ -30,6 +30,11 @@ const routes = [
         /* webpackChunkName: "beneficios-trabalhistas" */ "../views/Beneficios.vue"
       ),
   },
+  {
+    path: "/clt",
+    name: "CLT",
+    component: () => import(/* webpackChunkName: "clt" */ "../views/CLT.vue"),
+  },
 ];
 
 const router = new VueRouter({

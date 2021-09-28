@@ -7,6 +7,7 @@
         >Benefícios Trabalhistas para MEI</router-link
       >
       |
+      <!-- <router-link to="/clt">CLT</router-link> | -->
       <router-link to="/about">About</router-link>
     </div>
     <router-view />
