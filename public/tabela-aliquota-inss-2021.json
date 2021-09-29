@@ -5,6 +5,7 @@
             "text": "Até R$ 1.100,00",
             "start": 0,
             "end": 1100.00,
+            "isFixed": false,
             "percentage": 7.5
         },
         {
@@ -12,6 +13,7 @@
             "text": "De R$ 1.100,01 até R$ 2.203,48",
             "start": 1100.01,
             "end": 2203.48,
+            "isFixed": false,
             "percentage": 9
         },
         {
@@ -19,6 +21,7 @@
             "text": "De R$ 2.203,49 até R$ 3.305,22",
             "start": 2203.49,
             "end": 3305.22,
+            "isFixed": false,
             "percentage": 12
         },
         {
@@ -26,6 +29,7 @@
             "text": "De R$ 3.305,23 até R$ 6.433,57",
             "start": 3305.23,
             "end": 6433.57,
+            "isFixed": false,
             "percentage": 14
         },
         {
@@ -33,6 +37,7 @@
             "text": "Acima de R$ 6.433,57",
             "start": 6433.57,
             "end": 9999999,
+            "isFixed": true,
             "percentage": 751.99
         }
     ]

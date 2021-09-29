@@ -87,39 +87,36 @@
               :class="{ 'row--selected': aliquota.id === valorDaAliquota.id }"
             >
               <td class="text-left">{{ aliquota.text }}</td>
-              <td>{{ aliquota.percentage }}%</td>
+              <td v-if="!aliquota.isFixed">{{ aliquota.percentage }}%</td>
+              <td v-else>R$ {{ aliquota.percentage }}</td>
             </tr>
           </table>
-
-          <!-- <h2 class="text-left pb-2">Passo 3:</h2>
-        <div class="form__control">
-          <label class="text-left" for="parcelaIsenta"
-            >Parcela a deduzir (Lucro tributavel * porcentagem da aliquota da
-            tabela)</label
-          >
-          <input
-            type="tel"
-            name="parcelaDeduzida"
-            v-money="money"
-            :value="parcelaDeduzida"
-            disabled
-          />
         </div>
 
-        <h2 class="text-left pb-2">Passo 4:</h2>
-        <div class="form__control">
-          <label class="text-left" for="parcelaIsenta"
-            >Total para pagar de IR (Parcela deduzida - Parcela deduzida da
-            tabela)</label
-          >
-          <input
-            type="tel"
-            name="totalImpostoDeRenda"
-            v-money="money"
-            :value="totalImpostoDeRenda * 100"
-            disabled
-          />
-        </div> -->
+        <div>
+          <h3 class="text-left">
+            Em teoria, a tabela do IRRF deveria ser atualizada conforme a
+            inflação e economia do país. Contudo, ela não sofre nenhuma mudança
+            desde 2015, devendo as empresas se guiarem por essa mesma tabela em
+            2021.
+          </h3>
+
+          <table class="pb-2">
+            <tr class="border-bottom">
+              <th>Faixa Salarial</th>
+              <th>Alíquota</th>
+            </tr>
+            <tr
+              v-for="aliquota in aliquotasIRPF"
+              :key="aliquota.id"
+              :id="aliquota.id"
+              :class="{ 'row--selected': aliquota.id === valorDaAliquota.id }"
+            >
+              <td class="text-left">{{ aliquota.text }}</td>
+              <td v-if="!aliquota.isFixed">{{ aliquota.percentage }}%</td>
+              <td v-else>R$ {{ aliquota.percentage }}</td>
+            </tr>
+          </table>
         </div>
       </div>
     </div>
@@ -140,6 +137,7 @@ export default {
       salarioBruto: 0,
       receitaBrutaAnual: 0,
       aliquotas: [],
+      aliquotasIRPF: [],
       money: {
         decimal: ",",
         thousands: ".",
@@ -150,6 +148,7 @@ export default {
   },
   mounted() {
     this.getTabelaAliquotas();
+    this.getTabelaIRPF();
   },
   watch: {
     receitaBrutaAnual() {
@@ -170,6 +169,13 @@ export default {
         this.aliquotas = response.data.aliquotas;
       });
     },
+    async getTabelaIRPF() {
+      await axios
+        .get("/tabela-aliquota-irpf-clt-2021.json")
+        .then((response) => {
+          this.aliquotasIRPF = response.data.aliquotasIRPF;
+        });
+    },
     convert2Real(valor) {
       return valor.toLocaleString("pt-br", {
         style: "currency",
@@ -179,72 +185,94 @@ export default {
     track() {
       this.$ga.page("/clt");
     },
-    updateChart(data) {
-      if (this.haveChartSeriesData) {
-        this.setUpChart();
-        this.chart.update(data);
-      }
-    },
-    setUpChart() {
-      if (this.haveChartSeriesData && !this.chart) {
-        this.chart = this.getChart();
-      }
-    },
-    getChart() {
-      const formatter = new Intl.NumberFormat("pt-BR", {
-        style: "currency",
-        currency: "BRL",
-      });
-      const options = {
-        labelInterpolationFnc: function(value) {
-          return formatter.format(value);
-        },
-        plugins: [
-          Chartist.plugins.legend({
-            legendNames: [
-              "Valor guardado durante o ano",
-              "Restante da receita anual",
-            ],
-            clickable: false,
-          }),
-        ],
-      };
-
-      return new Chartist.Pie(".total-spend-chart", null, options);
-    },
   },
   directives: { money: VMoney },
   computed: {
     inss() {
       const salarioBruto = convertMoneyMaskToNumber(this.salarioBruto);
-
-      console.log(this.valorDaAliquota);
-
-      const discount = 0;
       let aliq1 = 0;
       let aliq2 = 0;
       let aliq3 = 0;
+      let aliq4 = 0;
+      let aliq5 = 0;
       let aliqTotal = 0;
 
-      if (this.valorDaAliquota.id === 3) {
-        aliq1 = 82.5;
-        aliq2 = 99.31;
-        // salarioBruto - 2203.49 = 796.51 * 12%
-        aliq3 = ((salarioBruto - 2203.49) * 12) / 100;
-        aliqTotal = aliq1 + aliq2 + aliq3;
+      // Fonte: https://www.idinheiro.com.br/calculadoras/calculadora-inss/
+
+      if (this.valorDaAliquota.id >= 1) {
+        if (salarioBruto > this.aliquotas[0].end) {
+          aliq1 =
+            (this.aliquotas[0].end - this.aliquotas[0].start) *
+            (this.aliquotas[0].percentage / 100);
+        } else {
+          aliq1 = salarioBruto * (this.aliquotas[0].percentage / 100);
+        }
       }
 
-      //  Por exemplo, um funcionário recebe uma remuneração de R$3 mil. Ele deverá fazer o cálculo a partir do total que passar de cada limite.
+      if (this.valorDaAliquota.id >= 2) {
+        if (salarioBruto > this.aliquotas[1].end) {
+          aliq2 =
+            (this.aliquotas[1].end - this.aliquotas[1].start) *
+            (this.aliquotas[1].percentage / 100);
+        } else {
+          aliq2 =
+            (salarioBruto - this.aliquotas[0].end) *
+            (this.aliquotas[1].percentage / 100);
+        }
+      }
 
-      // Na prática, funciona da seguinte maneira: a contribuição da primeira faixa é para salários de até R$1.100, com alíquota de 7,5%, resultando em R$ 82,50. Em seguida, como a remuneração ultrapassa a segunda faixa, é necessário calcular a base de contribuição realizando a subtração dos limites.
+      if (this.valorDaAliquota.id >= 3) {
+        if (salarioBruto > this.aliquotas[2].end) {
+          aliq3 =
+            (this.aliquotas[2].end - this.aliquotas[2].start) *
+            (this.aliquotas[2].percentage / 100);
+        } else {
+          aliq3 =
+            (salarioBruto - this.aliquotas[1].end) *
+            (this.aliquotas[2].percentage / 100);
+        }
+      }
 
-      // No caso, R$ 1.100,01 de R$ 2.203,48, totalizando R$ 1.103,47. Aplicando a alíquota de 9%, a contribuição soma mais R$ 99.31.
+      if (this.valorDaAliquota.id >= 4) {
+        if (salarioBruto > this.aliquotas[3].end) {
+          aliq4 =
+            (this.aliquotas[3].end - this.aliquotas[3].start) *
+            (this.aliquotas[3].percentage / 100);
+        } else {
+          aliq4 =
+            (salarioBruto - this.aliquotas[2].end) *
+            (this.aliquotas[3].percentage / 100);
+        }
+      }
 
-      // Por fim, o salário se encaixa na terceira faixa salarial. Subtraindo R$ 3 mil do limite de R$ 2.203,49, o resultado é R$ 796,51. Aplicando a alíquota de 12%, chega-se ao valor de R$ 95,58.
+      if (this.valorDaAliquota.id >= 5) {
+        if (salarioBruto > this.aliquotas[4].end) {
+          aliq5 =
+            (this.aliquotas[4].end - this.aliquotas[4].start) *
+            (this.aliquotas[4].percentage / 100);
+        } else {
+          aliqTotal = 751.99;
+          return aliqTotal;
+        }
+      }
+
+      aliqTotal = aliq1 + aliq2 + aliq3 + aliq4 + aliq5;
 
       return aliqTotal;
     },
     valorDaAliquota() {
+      let faixaAliquota = {};
+      const salarioBruto = convertMoneyMaskToNumber(this.salarioBruto);
+
+      for (const iterator of this.aliquotas) {
+        if (salarioBruto >= iterator.start && salarioBruto <= iterator.end) {
+          faixaAliquota = iterator;
+        }
+      }
+
+      return faixaAliquota;
+    },
+    irpfTax() {
       let faixaAliquota = {};
       const salarioBruto = convertMoneyMaskToNumber(this.salarioBruto);
 
