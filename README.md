@@ -87,3 +87,17 @@ npm run build
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+---
+
+## If you prefer to use Yarn
+
+```
+yarn install
+
+```
+
+### Compiles and reload for development 
+```
+yarn serve
+```
