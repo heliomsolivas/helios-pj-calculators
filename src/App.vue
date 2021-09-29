@@ -1,17 +1,18 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/calculator">IRPF para MEI</router-link> |
-      <router-link to="/beneficios-trabalhistas"
-        >Benefícios Trabalhistas para MEI</router-link
-      >
-      |
-      <router-link to="/about">About</router-link>
-    </div>
+    <Header />
     <router-view />
   </div>
 </template>
+
+<script>
+import Header from './components/Header.vue';
+export default {
+  components: {
+    Header,
+  },
+};
+</script>
 
 <style>
 * {
@@ -19,17 +20,17 @@
 }
 body {
   margin: 0;
+  background-color: var(--bg);
+  color: var(--color);
 }
 #app {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
 }
 h1 {
   font-size: 20px;
-  color: #181c32;
   margin: 0;
 }
 h2 {
@@ -45,19 +46,7 @@ h3 {
 .pb-2 {
   padding-bottom: 16.25px;
 }
-#nav {
-  padding: 30px;
-}
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-  font-size: 20px;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
 a {
   text-decoration: none;
   font-weight: 500;
@@ -70,7 +59,7 @@ a:visited {
   max-width: 100%;
   width: 100%;
   margin: 0 auto;
-  background-color: #f5f8fa;
+  background-color: var(--bg);
   border-radius: 1.5rem;
   padding: 20px;
 }
@@ -115,21 +104,21 @@ img {
 .border-bottom {
   border-bottom: 1px solid #eff2f5;
 }
-input[type="tel"] {
+input[type='tel'] {
   height: 42px;
   padding: 12px;
-  background-color: #f5f8fa;
+  background-color: var(--bg);
   color: #5e6278;
   transition: color 0.2s ease, background-color 0.2s ease;
   border: 1px solid #f5f8fa;
   appearance: none;
   border-radius: 0.475rem;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 14px;
   font-weight: 700;
 }
-input[type="tel"]:focus {
-  background-color: #eef3f7;
+input[type='tel']:focus {
+  background-color: var(--bg);
   border-color: #eef3f7;
   outline: none;
   color: #5e6278;
@@ -164,7 +153,7 @@ td {
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: #fff;
+  background-color: var(--bg);
   background-clip: border-box;
   border: 1px solid #eff2f5;
   border-radius: 0.475rem;
@@ -172,7 +161,7 @@ td {
 }
 .featured {
   border: 1px dashed #42b983;
-  background-color: #f1faff;
+  background-color: var(--bg);
   padding: 20px;
 }
 .description {
@@ -183,5 +172,28 @@ td {
 }
 h2 ~ .description {
   margin-bottom: 6px;
+}
+:root {
+  --color: #243746;
+  --color-primary: #158876;
+  --color-secondary: #0e2233;
+  --bg: #f3f5f4;
+  --bg-secondary: #fff;
+  --border-color: #ddd;
+}
+.dark-mode {
+  --color: #ebf4f1;
+  --color-primary: #41b38a;
+  --color-secondary: #fdf9f3;
+  --bg: #091a28;
+  --bg-secondary: #071521;
+  --border-color: #0d2538;
+}
+.sepia-mode {
+  --color: #433422;
+  --color-secondary: #504231;
+  --bg: #f1e7d0;
+  --bg-secondary: #eae0c9;
+  --border-color: #ded0bf;
 }
 </style>
