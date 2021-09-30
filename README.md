@@ -68,6 +68,7 @@ Me mande um email: heliomsolivas@gmail.com que a gente pode pensar em algumas id
 - Melhorar calculos
 - Novas calculadoras
 - Multi Lang README
+- Criar guia de contribuição
 
 ---------------------------------------
 ## Project setup

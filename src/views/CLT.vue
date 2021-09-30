@@ -127,10 +127,13 @@
 import axios from "axios";
 import { convertMoneyMaskToNumber } from "@/utils/utils.js";
 import { VMoney } from "v-money";
-import Chartist from "chartist";
+import CalculoValeTransporteMixin from "../mixins/CalculoValeTransporteMixin.js";
 require("chartist-plugin-legend");
 
 export default {
+  mixins:[
+    CalculoValeTransporteMixin,
+  ],
   data() {
     return {
       chart: null,
@@ -319,7 +322,7 @@ export default {
     },
     showChart() {
       return this.haveChartSeriesData ? "block" : "hidden";
-    },
+    }    
   },
 };
 </script>
